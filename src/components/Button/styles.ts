@@ -11,16 +11,16 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: Theme[0].colors.gray2
+        backgroundColor: Theme.colors.gray2
     },
     title: {
-        fontSize: Theme[0].typography.fontSizes[1],
-        color: Theme[0].colors.white,
+        fontSize: Theme.typography.fontSizes[1],
+        color: Theme.colors.white,
         fontWeight: "bold"
     },
     label: {
-        fontSize: Theme[0].typography.fontSizes[2],
-        color: Theme[0].colors.gray1,
+        fontSize: Theme.typography.fontSizes[2],
+        color: Theme.colors.gray1,
         marginBottom: 8
     }
 })

@@ -1,6 +1,6 @@
 
 // Theme array contendo os objetos de cores e tipografia
-export const Theme = [
+export const Theme =
   {
     colors: {
       redDark: "#BF3B44",
@@ -27,5 +27,4 @@ export const Theme = [
       lineHeight: "130%",
       fontSizes: [12, 14, 16, 18, 24, 32]
     }
-  }
-];
+  };

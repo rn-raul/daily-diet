@@ -5,7 +5,7 @@ import { Theme } from "@/theme";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Theme[0].colors.white,
+        backgroundColor: Theme.colors.white,
         paddingHorizontal: 24,
         paddingTop: 64
     },
@@ -13,6 +13,14 @@ export const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         marginTop: 24,
-        marginBottom: 16
-    }
+    },
+    separator: {
+        width: "100%",
+        marginVertical: 8,
+    },
+    sectionHeader: {
+        fontSize: Theme.typography.fontSizes[3],
+        fontWeight: 'bold',
+        color: Theme.colors.gray1,
+    },
 })

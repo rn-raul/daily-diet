@@ -1,62 +1,95 @@
 import { SectionList, View, Text } from "react-native";
 import { styles } from "./styles";
 import { Header } from "../../components/Header";
-import { CardPorcentage } from "../../components/CardPorcentage";
+import { CardPercentage } from "../../components/CardPorcentage";
 import { Button } from "@/components/Button";
-import { CardItem } from "@/components/CardItem";
-import { Status } from "@/@types/status";
-const sections = [
-    {
-        title: "28/11/2025",
-        data: [
-            { id: "1", hora: "08:00", name: "Café da manhã", status: Status.IN_DIET },
-            { id: "2", hora: "12:00", name: "Almoço"    , status: Status.OUT_OF_DIET },
-        ],
-    },
-    {
-        title: "27/11/2025",
-        data: [
-            { id: "3", hora: "19:00", name: "Jantar", status: Status.IN_DIET },
-        ],
-    },
-    {
-        title: "26/11/2025",
-        data: [
-            { id: "4", hora: "08:00", name: "Café da manhã", status: Status.IN_DIET },
-        ],
-    },
-    {
-        title: "25/11/2025",
-        data: [
-            { id: "5", hora: "12:00", name: "Almoço", status: Status.OUT_OF_DIET },
-        ],
-    }, {
-        title: "24/11/2025",
-        data: [
-            { id: "6", hora: "19:00", name: "Jantar", status: Status.IN_DIET },
-        ],
-    }
-];
+import { Item } from "@/components/Item";
+import { Status } from "@/types/Status";
+import { useNavigation } from "@react-navigation/native";
+
 export function Home() {
-    return (
-        <View style={styles.container}>
-            <Header />
-            <CardPorcentage percentage={40.32} />
-            <Button title="Nova Refeição" label="Refeições" icon="Plus" />
-            <View style={styles.listContainer}>
-                <SectionList
-                sections={sections}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <CardItem data={item} onPressEdit={() => {}} />
-                )}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ paddingBottom: 100 }}
-                renderSectionHeader={({ section }) => (
-                    <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 8, marginTop: 16 }}>{section.title}</Text>
-                )}
-            />
-            </View>
-        </View>
-    )
+  const navigation = useNavigation();
+  const DADOS = [
+    {
+      title: "18.08.23",
+      data: [
+        { id: "1", time: "08:00", description: "Café", status: Status.IN_DIET },
+        {
+          id: "2",
+          time: "10:00",
+          description: "Banana",
+          status: Status.IN_DIET,
+        },
+        {
+          id: "3",
+          time: "12:00",
+          description: "X - Tudo",
+          status: Status.IN_DIET,
+        },
+        {
+          id: "4",
+          time: "15:00",
+          description: "Salada",
+          status: Status.IN_DIET,
+        },
+      ],
+    },
+    {
+      title: "19.08.23",
+      data: [
+        {
+          id: "5",
+          time: "09:00",
+          description: "Ovos",
+          status: Status.OUT_OF_DIET,
+        },
+        {
+          id: "6",
+          time: "13:00",
+          description: "Frango",
+          status: Status.IN_DIET,
+        },
+      ],
+    },
+  ];
+  const totalRefeicoes = DADOS.reduce(
+    (total, secao) => total + secao.data.length,
+    0
+  );
+  const refeicoesNaDieta = DADOS.reduce(
+    (total, secao) =>
+      total +
+      secao.data.filter((item) => item.status === Status.IN_DIET).length,
+    0
+  );
+  const porcentagem =
+    totalRefeicoes > 0
+      ? ((refeicoesNaDieta / totalRefeicoes) * 100).toFixed(2)
+      : "0.00";
+  return (
+    <View style={styles.container}>
+      <Header />
+      <CardPercentage
+        percentage={Number(porcentagem)}
+        onPress={() => navigation.navigate("Estatisticas")}
+      />
+      <Button title="Nova Refeição" label="Refeições" icon="plus" />
+      <View style={styles.listContainer}>
+        <SectionList
+          sections={DADOS}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <Item data={item} onPress={() => {}}/>}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.sectionHeader}>{title}</Text>
+          )}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          SectionSeparatorComponent={() => (
+            <View style={{ marginBottom: 12 }} />
+          )}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+      </View>
+    </View>
+  );
 }

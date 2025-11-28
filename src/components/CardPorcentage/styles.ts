@@ -11,13 +11,13 @@ export const styles = StyleSheet.create({
         marginBottom: 32,
     },
     percentage: {
-        fontSize: Theme[0].typography.fontSizes[5],
+        fontSize: Theme.typography.fontSizes[5],
         fontWeight: "bold",
         textAlign: 'center',
     },
     subtitle: {
-        fontSize: Theme[0].typography.fontSizes[2],
-        color: Theme[0].colors.gray2,
+        fontSize: Theme.typography.fontSizes[2],
+        color: Theme.colors.gray2,
         textAlign: 'center',
     }
 })

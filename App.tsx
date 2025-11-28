@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Home } from '@/screens/Home';
+import { Routes } from '@/routes';
 export default function App() {
   return (
       <>
         <StatusBar style="auto" />
-        <Home />
+        <Routes />
       </>
   );
 }
